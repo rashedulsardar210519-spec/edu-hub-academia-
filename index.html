@@ -141,4 +141,92 @@ document.getElementById("inquiryForm").addEventListener("submit", async function
 });
 document.getElementById("waFloat").addEventListener("click",function(e){if(!validWhatsApp()){e.preventDefault();contactLink("Hello EDU HUB Academia & Learning Point. I would like to know about your courses and admission.");}else{this.href="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent("Hello EDU HUB Academia & Learning Point. I would like to know about your courses and admission.");}});
 </script>
+  
+<!-- Load Firebase libraries for public course and notice display -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+<script>
+(async function () {
+  try {
+    // Reuse Firebase if it has already been initialized.
+    const app = firebase.apps.length
+      ? firebase.app()
+      : firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore(app);
+
+    // Display courses saved from the Admin Dashboard.
+    const courseArea = document.querySelector(".cards");
+
+    if (courseArea) {
+      const courseSnapshot = await db.collection("courses").get();
+
+      if (!courseSnapshot.empty) {
+        courseArea.replaceChildren();
+
+        courseSnapshot.forEach(function (doc) {
+          const course = doc.data();
+          const card = document.createElement("article");
+          card.className = "card";
+
+          const icon = document.createElement("div");
+          icon.className = "iconbox";
+          icon.textContent = "📘";
+
+          const title = document.createElement("h3");
+          title.textContent = course.name || "Course";
+
+          const description = document.createElement("p");
+          description.textContent = course.description || "";
+
+          const fee = document.createElement("span");
+          fee.className = "tag";
+          fee.textContent = course.fee ? "Fee: " + course.fee : "Contact us";
+
+          card.append(icon, title, description, fee);
+          courseArea.appendChild(card);
+        });
+      }
+    }
+
+    // Display notices saved from the Admin Dashboard.
+    const noticeArea = document.querySelector(".notice-list");
+
+    if (noticeArea) {
+      const noticeSnapshot = await db.collection("notices").get();
+
+      if (!noticeSnapshot.empty) {
+        noticeArea.replaceChildren();
+
+        noticeSnapshot.forEach(function (doc) {
+          const notice = doc.data();
+          const article = document.createElement("article");
+          article.className = "notice";
+
+          const date = document.createElement("div");
+          date.className = "datebox";
+          date.textContent = notice.date || "INFO";
+
+          const content = document.createElement("div");
+          const title = document.createElement("h3");
+          title.textContent = notice.title || "Notice";
+
+          const body = document.createElement("p");
+          body.textContent = notice.body || "";
+
+          content.append(title, body);
+          article.append(date, content);
+          noticeArea.appendChild(article);
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Could not load courses or notices:", error);
+  }
+})();
+</script>
+</body>
+</html>
+
 </body></html>
