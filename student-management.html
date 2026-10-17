@@ -27,7 +27,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import {getFirestore,collection,doc,getDoc,getDocs,query,orderBy,limit,updateDoc,addDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyATKQo3-rvwDdty1grT4c342Q-Wz2_NjLM",authDomain:"edu-hub-academia-c0590.firebaseapp.com",projectId:"edu-hub-academia-c0590",storageBucket:"edu-hub-academia-c0590.firebasestorage.app",messagingSenderId:"442933493275",appId:"1:442933493275:web:4b59ddfd78348505fb02be",measurementId:"G-SRGMEY6N5E"};
+const firebaseConfig={apiKey:"AIzaSyCGTVwIVF4bd_FJ_lVQTxUDlv11Z-aRkWE",authDomain:"edu-hub-academia.firebaseapp.com",projectId:"edu-hub-academia",storageBucket:"edu-hub-academia.firebasestorage.app",messagingSenderId:"615505882670",appId:"1:615505882670:web:b4992a2460fc28ce4cf9bf",measurementId:"G-L6XRVJ965F"};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id);
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function msg(id,text,kind=""){const el=$(id);el.textContent=text;el.className="status "+kind}
