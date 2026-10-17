@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDU HUB Academia — Course Enrollment</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f7fc;color:#172b43;font-family:system-ui,-apple-system,"Noto Sans Bengali",Arial,sans-serif;line-height:1.5}.wrap{max-width:680px;margin:24px auto;padding:14px}.panel{background:#fff;border:1px solid #dce5ef;border-radius:18px;padding:22px;box-shadow:0 10px 28px #10243e0d}h1{margin:0 0 6px;color:#123b67;font-size:1.6rem}.muted{color:#61738a}.field{display:grid;gap:6px;margin:14px 0}.field label{font-weight:700;font-size:.92rem}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cbd7e5;border-radius:10px;font:inherit}.pay{padding:15px;background:#eaf4ff;border-radius:12px;margin:16px 0}.number{font-size:1.25rem;font-weight:850;letter-spacing:.04em;color:#123b67}.hint{font-size:.86rem}.btn{width:100%;border:0;border-radius:10px;padding:13px;background:#1768ac;color:#fff;font:inherit;font-weight:800}.status{margin-top:12px;white-space:pre-wrap;font-size:.92rem}.warn{background:#fff8e6;padding:12px;border-radius:10px;font-size:.86rem;color:#74500a}
+</style>
+</head>
+<body><main class="wrap"><section class="panel">
+<h1>EDU HUB Academia</h1><div class="muted">কোর্সে ভর্তি আবেদন · Course Enrollment</div>
+<p>ফর্মটি পূরণ করুন এবং যে নম্বর থেকে টাকা পাঠিয়েছেন তার Transaction ID দিন। আবেদনটি যাচাই না হওয়া পর্যন্ত <b>Pending</b> থাকবে।</p>
+<div class="pay"><b>Manual Payment</b><p>পেমেন্ট মাধ্যম বেছে নিন: bKash / Nagad / Rocket</p><div class="number">01580692962</div><div class="hint">Account type: Personal</div><div class="warn" style="margin-top:12px">টাকা পাঠানোর আগে কোর্স ফি নিশ্চিত করুন। এই ফর্ম পেমেন্ট স্বয়ংক্রিয়ভাবে নিশ্চিত করে না। Transaction ID যাচাই করার পর Admin সিদ্ধান্ত নেবেন।</div></div>
+<form id="enrollForm">
+<div class="field"><label for="name">শিক্ষার্থীর নাম *</label><input id="name" maxlength="100" required></div>
+<div class="field"><label for="phone">মোবাইল নম্বর *</label><input id="phone" inputmode="tel" maxlength="20" required></div>
+<div class="field"><label for="course">কোর্সের নাম *</label><input id="course" maxlength="120" required placeholder="যে কোর্সে ভর্তি হতে চান"></div>
+<div class="field"><label for="method">পেমেন্ট মাধ্যম *</label><select id="method" required><option value="">নির্বাচন করুন</option><option>bKash</option><option>Nagad</option><option>Rocket</option></select></div>
+<div class="field"><label for="sender">যে নম্বর থেকে টাকা পাঠিয়েছেন *</label><input id="sender" inputmode="tel" maxlength="20" required></div>
+<div class="field"><label for="trx">Transaction ID (TrxID) *</label><input id="trx" maxlength="100" required></div>
+<div class="field"><label for="amount">পাঠানো টাকার পরিমাণ (৳) *</label><input id="amount" type="number" min="1" step="1" required></div>
+<div class="field"><label for="note">অতিরিক্ত তথ্য (ঐচ্ছিক)</label><textarea id="note" maxlength="500" rows="3"></textarea></div>
+<button class="btn" type="submit">ভর্তি আবেদন জমা দিন</button><div class="status" id="status" role="status"></div>
+</form>
+<p class="muted hint">আপনার আবেদন জমা দিলে সেটি Pending অবস্থায় থাকবে। Admin যাচাই না করা পর্যন্ত ভর্তি নিশ্চিত নয়।</p>
+</section></main>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCGTVwIVF4bd_FJ_lVQTxUDlv11Z-aRkWE",
+  authDomain: "edu-hub-academia.firebaseapp.com",
+  projectId: "edu-hub-academia",
+  storageBucket: "edu-hub-academia.firebasestorage.app",
+  messagingSenderId: "615505882670",
+  appId: "1:615505882670:web:b4992a2460fc28ce4cf9bf",
+  measurementId: "G-L6XRVJ965F"
+};
+const form=document.getElementById('enrollForm'), statusEl=document.getElementById('status');
+try{firebase.initializeApp(firebaseConfig);const db=firebase.firestore();
+form.addEventListener('submit',async e=>{
+ e.preventDefault();const btn=form.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='জমা হচ্ছে…';statusEl.textContent='';
+ const record={name:document.getElementById('name').value.trim(),phone:document.getElementById('phone').value.trim(),course:document.getElementById('course').value.trim(),paymentMethod:document.getElementById('method').value,senderPhone:document.getElementById('sender').value.trim(),transactionId:document.getElementById('trx').value.trim(),amount:Number(document.getElementById('amount').value),note:document.getElementById('note').value.trim(),status:'pending',paymentStatus:'pending',createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+ try{await db.collection('enrollments').add(record);form.reset();statusEl.textContent='আবেদন জমা হয়েছে। Status: PENDING. Admin Transaction ID যাচাই করার পর জানানো হবে।';}
+ catch(err){statusEl.textContent='আবেদন জমা হয়নি। Firebase Firestore Rules/connection পরীক্ষা করুন। বিস্তারিত: '+err.message;}
+ btn.disabled=false;btn.textContent='ভর্তি আবেদন জমা দিন';
+});
+}catch(err){statusEl.textContent='Firebase চালু করা যায়নি: '+err.message;}
+</script></body></html>
