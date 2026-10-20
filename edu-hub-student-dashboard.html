@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard | EDU HUB Academia</title>
+<style>
+:root{--navy:#081b4d;--blue:#2457ff;--ink:#10265a;--muted:#64749c;--paper:#f4f7ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#eef3ff,#fbfcff 55%,#eaf5ff);min-height:100vh}
+button,input,a{font:inherit}a{text-decoration:none;color:inherit}.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+.sidebar{background:linear-gradient(180deg,#071641,#102b69 70%,#08183f);color:#fff;padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;padding:2px 8px 24px}.brand-icon{font-size:32px;filter:drop-shadow(0 4px 6px #0004)}.brand-name{font-weight:900;font-size:21px;line-height:1.05;letter-spacing:.2px}.brand-name span{display:block;color:#57d7ff;font-size:15px;letter-spacing:2px;margin-top:4px}.tagline{font-size:11px;color:#d4e3ff;margin:0 8px 25px}
+.nav{display:grid;gap:7px}.nav a{display:flex;align-items:center;gap:13px;padding:12px 13px;border-radius:13px;color:#e9efff;font-size:14px;transition:.25s}.nav a .ico{font-size:20px;width:25px;text-align:center}.nav a:hover,.nav a.active{background:linear-gradient(110deg,#3b6cff,#5b35ef);box-shadow:0 8px 22px #354dff55;transform:translateX(3px)}.sidebar-quote{margin:auto 10px 20px;padding-top:35px;color:#fff;font-size:24px;font-weight:800;font-style:italic;line-height:1.25;transform:rotate(-5deg)}.sidebar-quote span{color:#ff75bf}.sidebar-books{text-align:center;font-size:48px;padding:10px 0 0;filter:drop-shadow(0 8px 10px #0005)}
+main{min-width:0;padding:0 24px 0 0}.topbar{height:74px;display:flex;align-items:center;gap:16px;padding:0 4px 0 24px}.search-wrap{flex:1;position:relative;max-width:650px}.search-wrap span{position:absolute;left:17px;top:10px;font-size:19px;color:#7182ac}.search{width:100%;border:1px solid #e5eaff;background:#fff;border-radius:30px;padding:12px 18px 12px 46px;outline:none;box-shadow:0 5px 20px #243d7410}.search:focus{border-color:#6d8cff;box-shadow:0 0 0 4px #315cff15}.top-actions{margin-left:auto;display:flex;align-items:center;gap:16px}.icon-btn{border:0;background:#fff;border-radius:50%;width:40px;height:40px;box-shadow:0 5px 16px #1d3d7714;position:relative;cursor:pointer}.badge{position:absolute;right:-2px;top:-4px;background:#ff3159;color:#fff;border-radius:20px;font-size:11px;padding:3px 6px}.profile{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800}.avatar{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#5bc8ff,#6954ff);font-size:23px;border:3px solid white}
+.content{padding:7px 0 0 24px}.hero{min-height:245px;overflow:hidden;position:relative;border-radius:17px;background:radial-gradient(circle at 68% 20%,#fb66f0 0,transparent 27%),radial-gradient(circle at 88% 60%,#10d3ff 0,transparent 30%),linear-gradient(115deg,#1735ff,#7028f4 62%,#1c9fff);color:#fff;padding:34px 35px;display:flex;align-items:center;box-shadow:0 12px 28px #3449ff20;isolation:isolate}.hero:before,.hero:after{content:"";position:absolute;border:1px solid #ffffff30;border-radius:50%;width:330px;height:330px;right:5%;top:-90px;z-index:-1;animation:spin 24s linear infinite}.hero:after{width:250px;height:250px;right:9%;top:-48px;animation-direction:reverse}.hero-copy{max-width:53%;z-index:1}.eyebrow{font-size:22px;font-weight:800;margin-bottom:4px}.hero h1{font-size:clamp(27px,3vw,43px);line-height:1.1;margin:5px 0 12px;letter-spacing:-1px}.hero h1 span{color:#ffe46b}.hero p{font-size:15px;line-height:1.55;max-width:440px;margin:0 0 14px}.hero-pill{display:inline-flex;gap:10px;align-items:center;background:#ffffff25;border:1px solid #ffffff35;border-radius:30px;padding:11px 15px;font-weight:750;font-size:13px;backdrop-filter:blur(8px)}.hero-art{position:absolute;right:3%;bottom:-4px;width:43%;height:92%;display:flex;align-items:center;justify-content:center}.hero-art .student{font-size:clamp(90px,12vw,150px);filter:drop-shadow(0 12px 12px #05165355);animation:float 4s ease-in-out infinite}.hero-art .books{position:absolute;bottom:15px;left:5%;font-size:54px;animation:float 4.5s ease-in-out infinite reverse}.hero-art .plant{position:absolute;top:28%;left:7%;font-size:42px}.hero-art .pencil{position:absolute;bottom:27px;right:4%;font-size:37px}.hero-art .slogan{position:absolute;top:15%;right:2%;font-size:17px;font-weight:900;font-style:italic;transform:rotate(8deg);text-align:center}
+.section-head{display:flex;align-items:center;gap:10px;margin:22px 0 15px}.section-head h2{font-size:21px;margin:0;font-weight:900}.section-head p{font-size:12px;color:var(--muted);margin:3px 0 0}.section-head .all{margin-left:auto;border:0;background:#e7edff;color:#2347d9;padding:10px 15px;border-radius:25px;font-weight:800;font-size:12px;cursor:pointer}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:23px;align-items:start}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.service{border-radius:15px;min-height:195px;padding:15px 16px 14px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 20px #1d3b7514;transition:transform .25s,box-shadow .25s;isolation:isolate}.service:before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:#ffffff12;right:-40px;top:-45px;z-index:-1;transition:transform .35s}.service:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 17px 30px #1d3b7528}.service:hover:before{transform:scale(1.5)}.service .art{font-size:44px;text-align:center;line-height:1.1;margin:1px 0 10px;filter:drop-shadow(0 5px 4px #0002);animation:bob 4s ease-in-out infinite}.service h3{font-size:16px;margin:0 0 5px;font-weight:900}.service p{font-size:12px;line-height:1.4;margin:0 0 12px;max-width:220px}.service .go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:#ffffffdf;color:#1744c8;border-radius:30px;padding:7px 12px;font-size:11px;font-weight:900;transition:gap .2s}.service:hover .go{gap:13px}.blue{background:linear-gradient(140deg,#1b9cff,#1454f8)}.orange{background:linear-gradient(140deg,#ffb516,#ff7900)}.pink{background:linear-gradient(140deg,#ff45b1,#ed187c)}.green{background:linear-gradient(140deg,#20dca5,#00a886)}.purple{background:linear-gradient(140deg,#b23cff,#6c25f4)}.cyan{background:linear-gradient(140deg,#26d9ed,#008be9)}.service .count{position:absolute;right:12px;top:12px;background:#ff174c;border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:11px;font-weight:900}
+.material-banner{margin-top:17px;border-radius:15px;padding:18px 20px;min-height:118px;color:#fff;background:linear-gradient(105deg,#a725f3,#dc31d5 56%,#7d3dff);display:flex;align-items:center;gap:18px;position:relative;overflow:hidden}.material-banner .bookart{font-size:54px}.material-banner h3{margin:0 0 5px;font-size:17px}.material-banner p{font-size:12px;margin:0 0 10px;line-height:1.4}.material-banner a{display:inline-block;border-radius:25px;background:#fff;color:#6324cf;padding:7px 13px;font-size:11px;font-weight:900}.material-banner .smart{margin-left:auto;font-size:19px;font-style:italic;font-weight:800;transform:rotate(-8deg)}
+.panel{background:#fff;border:1px solid #e8edff;border-radius:15px;padding:16px 14px;box-shadow:0 8px 24px #173a7510}.panel-head{display:flex;align-items:center;gap:8px;margin:0 0 11px;font-size:16px}.panel-head button{margin-left:auto;border:0;background:#eef1ff;color:#3b4ddd;border-radius:20px;padding:7px 11px;font-size:11px;font-weight:800;cursor:pointer}.notice{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid #edf0fb}.notice:last-child{border-bottom:0}.datebox{background:#f0edff;border-radius:10px;text-align:center;padding:5px 2px;color:#10265a;font-size:11px;line-height:1.2}.datebox strong{font-size:16px;display:block}.notice p{font-size:12px;line-height:1.45;margin:2px 0}.new{display:inline-block;font-size:9px;background:#fff3d7;color:#b96800;border-radius:5px;padding:3px 6px;margin-top:4px}.motivation{margin-top:17px;border-radius:15px;min-height:210px;padding:20px 18px;color:white;background:radial-gradient(circle at 75% 90%,#ffcf5c,transparent 23%),linear-gradient(160deg,#6d31ff,#9349ff 65%,#2723b9);position:relative;overflow:hidden;text-align:center}.motivation h3{font-size:21px;font-style:italic;margin:5px 0 8px}.motivation p{font-size:12px;line-height:1.5;max-width:170px;margin:0 auto}.motivation .landscape{font-size:40px;margin-top:15px;letter-spacing:5px;animation:float 5s ease-in-out infinite}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0;padding:15px 0;border-top:1px solid #e5ebfb}.feature{display:flex;align-items:center;justify-content:center;gap:10px;padding:0 8px;border-right:1px solid #dbe3f7}.feature:last-child{border:0}.feature .bubble{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;background:#e6f0ff;font-size:22px}.feature strong{font-size:11px;display:block}.feature small{font-size:10px;color:var(--muted);display:block;margin-top:4px}.footer{background:linear-gradient(90deg,#0b1b4c,#1a3675);color:#dce7ff;text-align:center;margin:0 -24px 0 0;padding:18px 10px;font-size:11px}
+#empty{display:none;grid-column:1/-1;text-align:center;color:#7180a7;padding:30px}.to-top{position:fixed;right:18px;bottom:18px;border:0;width:42px;height:42px;border-radius:50%;color:white;background:linear-gradient(135deg,#5266ff,#822cff);box-shadow:0 8px 20px #3529ac55;cursor:pointer;font-size:20px;z-index:8}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:1100px){.app{grid-template-columns:205px minmax(0,1fr)}.layout{grid-template-columns:minmax(0,1fr) 250px;gap:15px}.cards{gap:12px}.service{padding:13px;min-height:190px}.hero{min-height:225px;padding:27px}.hero-art{right:1%;width:42%}.content{padding-left:18px}main{padding-right:18px}.footer{margin-right:-18px}}
+@media(max-width:850px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:12px 14px;overflow:visible}.brand{padding:0 5px 10px}.tagline{display:none}.sidebar-quote,.sidebar-books{display:none}.nav{display:flex;overflow-x:auto;padding-bottom:2px}.nav a{white-space:nowrap;padding:9px 12px}.nav a .ico{font-size:17px}.topbar{padding-left:18px;height:66px}.content{padding-left:18px}.layout{grid-template-columns:1fr}.side-column{display:grid;grid-template-columns:1fr 1fr;gap:14px}.motivation{margin-top:0}.footer{margin-right:-18px}.hero-art{opacity:.8}.hero-copy{max-width:65%}}
+@media(max-width:560px){main{padding:0 12px}.topbar{padding:0 4px;height:60px;gap:8px}.top-actions{gap:7px}.profile span:not(.avatar){display:none}.icon-btn{width:36px;height:36px}.content{padding:5px 0 0}.hero{min-height:220px;padding:23px 19px;align-items:flex-start}.hero-copy{max-width:100%;position:relative;z-index:2}.hero h1{font-size:31px}.hero p{font-size:13px;max-width:75%}.eyebrow{font-size:18px}.hero-art{right:-7%;width:55%;opacity:.35}.hero-pill{font-size:11px;padding:9px 11px}.section-head h2{font-size:19px}.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.service{min-height:190px;padding:12px;border-radius:13px}.service .art{font-size:38px}.service h3{font-size:14px}.service p{font-size:11px}.service .go{font-size:10px;padding:7px 9px}.material-banner{padding:15px;gap:10px}.material-banner .bookart{font-size:40px}.material-banner .smart{display:none}.side-column{grid-template-columns:1fr}.motivation{min-height:170px}.features{grid-template-columns:repeat(2,1fr);row-gap:16px}.feature{justify-content:flex-start;border-right:0}.footer{margin:0 -12px;font-size:10px}.section-head .all{padding:9px 11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <a class="brand" href="index.html"><span class="brand-icon">🎓</span><span class="brand-name">EDU HUB<span>Academia</span></span></a>
+  <p class="tagline">Learn Today, Lead Tomorrow</p>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="active" href="student-dashboard-animated.html"><span class="ico">⌂</span>Dashboard</a>
+    <a href="courses.html"><span class="ico">🎓</span>My Courses</a>
+    <a href="notices.html"><span class="ico">📣</span>Notices</a>
+    <a href="online-exam.html"><span class="ico">▤</span>Online Exam</a>
+    <a href="routine.html"><span class="ico">▦</span>Routine</a>
+    <a href="video-classes.html"><span class="ico">▶</span>Video Classes</a>
+    <a href="scoreboard.html"><span class="ico">🏆</span>Score Board</a>
+    <a href="materials.html"><span class="ico">📚</span>Study Materials</a>
+  </nav>
+  <div class="sidebar-quote">Small<br>Steps<br><span>♥</span> Big<br>Dreams</div>
+  <div class="sidebar-books">📚 🖊️</div>
+</aside>
+<main>
+<header class="topbar">
+  <label class="search-wrap"><span>⌕</span><input id="search" class="search" type="search" placeholder="Search anything..." aria-label="Search dashboard features"></label>
+  <div class="top-actions"><button class="icon-btn" id="noticeJump" aria-label="Jump to latest notices">♧<span class="badge">3</span></button><div class="profile"><span class="avatar">👨‍🎓</span><span>Student　⌄</span></div></div>
+</header>
+<div class="content">
+<section class="hero">
+  <div class="hero-copy"><div class="eyebrow">👋 Welcome Back,</div><h1>Dear <span>Student!</span></h1><p>Your learning journey is here. Explore courses, attend exams, watch video classes and more.</p><div class="hero-pill">🎓 &nbsp; Learn &nbsp;•&nbsp; Grow &nbsp;•&nbsp; Succeed</div></div>
+  <div class="hero-art" aria-hidden="true"><span class="plant">🪴</span><span class="student">🧑‍💻</span><span class="books">📚</span><span class="pencil">✏️</span><span class="slogan">Good Things<br>Take Time ♥</span></div>
+</section>
+<div class="section-head"><span style="font-size:28px">⚡</span><div><h2>Quick Access</h2><p>Choose what you want to do today.</p></div><button class="all" id="showAll">All Features　›</button></div>
+<div class="layout">
+  <section>
+    <div class="cards" id="cards">
+      <a class="service blue" data-search="enroll courses my courses" href="courses.html"><div class="art">🎓</div><h3>Enroll in Courses</h3><p>Explore courses and join your favourite classes.</p><span class="go">Go to Courses　➜</span></a>
+      <a class="service orange" data-search="notice board announcements updates" href="notices.html"><span class="count">3</span><div class="art">📣</div><h3>Notice Board</h3><p>See important notices, announcements and updates.</p><span class="go">View Notices　➜</span></a>
+      <a class="service pink" data-search="online exam test quiz" href="online-exam.html"><div class="art">📝</div><h3>Online Exam</h3><p>Participate in online tests and check your preparation.</p><span class="go">Start Exam　➜</span></a>
+      <a class="service green" data-search="class routine schedule timetable" href="routine.html"><div class="art">🗓️</div><h3>Class Routine</h3><p>Check class schedules and upcoming lessons.</p><span class="go">See Routine　➜</span></a>
+      <a class="service purple" data-search="online video classes recorded lessons" href="video-classes.html"><div class="art">📺</div><h3>Online Video Classes</h3><p>Watch recorded lessons and learn at your own pace.</p><span class="go">Watch Classes　➜</span></a>
+      <a class="service cyan" data-search="score board results marks performance" href="scoreboard.html"><div class="art">🏆</div><h3>Score Board</h3><p>View published exam results and your performance.</p><span class="go">View Results　➜</span></a>
+      <div id="empty">No features found. Try another search.</div>
+    </div>
+    <section class="material-banner"><div class="bookart">📚</div><div><h3>Study Materials</h3><p>Download notes, PDFs, worksheets and study resources.</p><a href="materials.html">Download Now　➜</a></div><div class="smart">Study<br>Smart ♥</div></section>
+  </section>
+  <aside class="side-column">
+    <section class="panel" id="latestNotices"><h3 class="panel-head">📢 Latest Notice <button id="viewNotices">View All</button></h3>
+      <div class="notice"><div class="datebox"><strong>15</strong>Oct</div><div><p>Class routine updated for next week.</p><span class="new">New</span></div></div>
+      <div class="notice"><div class="datebox"><strong>12</strong>Oct</div><div><p>Online exam will be held on 18 Oct 2026.</p><span class="new">New</span></div></div>
+      <div class="notice"><div class="datebox"><strong>10</strong>Oct</div><div><p>Study materials for Chapter 5 are now available.</p></div></div>
+      <div class="notice"><div class="datebox"><strong>08</strong>Oct</div><div><p>Video class link for Biology is updated.</p></div></div>
+      <div class="notice"><div class="datebox"><strong>05</strong>Oct</div><div><p>Monthly test result published.</p></div></div>
+    </section>
+    <section class="motivation"><div style="font-size:30px">📖</div><h3>Never Stop Learning ♥</h3><p>Education is the key to a brighter future.</p><div class="landscape">📚　🌄　🌿</div></section>
+  </aside>
+</div>
+<div class="features"><div class="feature"><span class="bubble">💻</span><div><strong>Learn Anywhere</strong><small>Access from any device</small></div></div><div class="feature"><span class="bubble">🛡️</span><div><strong>Safe & Secure</strong><small>Your data is protected</small></div></div><div class="feature"><span class="bubble">🧑‍💻</span><div><strong>24/7 Support</strong><small>We're here to help</small></div></div><div class="feature"><span class="bubble">📈</span><div><strong>Better Future</strong><small>Together we grow</small></div></div></div>
+</div>
+<footer class="footer">© <span id="year"></span> EDU HUB Academia. All rights reserved.　 |　 Learn Today, Lead Tomorrow 💜</footer>
+</main>
+</div>
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+<script>
+const search=document.getElementById('search'), cards=[...document.querySelectorAll('.service')], empty=document.getElementById('empty');
+search.addEventListener('input',()=>{let q=search.value.trim().toLowerCase(),shown=0;cards.forEach(card=>{let ok=(card.innerText+' '+card.dataset.search).toLowerCase().includes(q);card.style.display=ok?'flex':'none';if(ok)shown++});empty.style.display=shown?'none':'block';});
+document.getElementById('showAll').addEventListener('click',()=>{search.value='';search.dispatchEvent(new Event('input'));document.querySelector('.section-head').scrollIntoView({behavior:'smooth',block:'start'});});
+document.getElementById('noticeJump').addEventListener('click',()=>document.getElementById('latestNotices').scrollIntoView({behavior:'smooth',block:'center'}));
+document.getElementById('viewNotices').addEventListener('click',()=>location.href='notices.html');
+document.getElementById('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
