@@ -393,4 +393,33 @@ document.addEventListener("click", function(e) {
   }
 });
 </script>
+
+<script>
+document.getElementById("enrollForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const msg = document.getElementById("enrollMessage");
+  const name = document.getElementById("studentName").value.trim();
+  const phone = document.getElementById("studentPhone").value.trim();
+  const txn = document.getElementById("transactionId").value.trim();
+
+  try {
+    await firebase.firestore().collection("admissions").add({
+      name: name,
+      phone: phone,
+      course: "Course enrollment",
+      transactionId: txn,
+      status: "pending",
+      paymentStatus: "pending_manual_verification",
+      message: "Payment requires admin verification."
+    });
+
+    msg.textContent = "Application submitted. Status: Pending.";
+    this.reset();
+  } catch (error) {
+    msg.textContent = "Failed: " + error.message;
+  }
+});
+</script>
+</body></html>
 </body></html>
