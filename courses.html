@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102c60"><title>Courses | EDU HUB Academia</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f6fc;color:#172554;line-height:1.55}header{background:linear-gradient(135deg,#102c60,#2563eb);color:white;text-align:center;padding:38px 16px}header h1{margin:0 0 10px;font-size:clamp(28px,5vw,42px)}header p{margin:0;color:#e7efff}.container{max-width:1000px;margin:auto;padding:25px 15px}h2{text-align:center;margin:12px 0 22px}.courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:18px}.card{background:white;border:1px solid #dce4f0;border-radius:14px;overflow:hidden;box-shadow:0 4px 15px #0000000d;padding-bottom:20px;display:flex;flex-direction:column}.card h3{background:#2563eb;color:white;padding:24px 15px;margin:0;text-align:center;font-size:21px}.card:nth-child(2) h3{background:#087f8c}.card:nth-child(3) h3{background:#6846b5}.card p{padding:0 18px;color:#5b6475}.card ul{line-height:2;padding-left:38px;flex:1}button{background:#2563eb;color:white;border:0;padding:13px;border-radius:8px;font-size:15px;font-weight:bold;cursor:pointer}button:hover{filter:brightness(.92)}.card button{width:85%;margin:0 7.5%}form{max-width:580px;margin:20px auto;background:white;padding:22px;border:1px solid #dce4f0;border-radius:14px;box-shadow:0 4px 15px #0000000d}label{display:block;margin-top:13px;font-weight:bold}input,select,textarea{width:100%;padding:12px;margin-top:6px;border:1px solid #ccd4e3;border-radius:7px;font:inherit;font-size:16px;background:#fff}textarea{min-height:85px;resize:vertical}.payment{background:#eaf2ff;padding:15px;border-radius:9px;line-height:1.8;margin-top:18px;overflow-wrap:anywhere}.notice{font-size:13px;color:#795500;background:#fff8df;border:1px solid #f1dfa1;border-radius:8px;padding:12px;margin-top:16px}form button{width:100%;margin-top:18px}#result{color:#176044;font-weight:bold}footer{text-align:center;padding:20px;background:#102c60;color:white;margin-top:20px}
+</style></head>
+<body>
+<header><h1>EDU HUB Academia</h1><p>Learn Today, Lead Tomorrow</p></header>
+<main class="container">
+<h2>Our Courses</h2>
+<section class="courses" aria-label="Available courses">
+<article class="card"><h3>English 1st Paper</h3><p>Improve your English skills and prepare for examinations.</p><ul><li>Complete lessons</li><li>Practice questions</li><li>Exam preparation</li></ul><button type="button" onclick="enroll('English 1st Paper')">Enroll Now</button></article>
+<article class="card"><h3>Biology</h3><p>Learn biology with chapter-based lessons and MCQs.</p><ul><li>Chapter-wise learning</li><li>Online MCQ practice</li><li>Model tests</li></ul><button type="button" onclick="enroll('Biology')">Enroll Now</button></article>
+<article class="card"><h3>Mathematics</h3><p>Understand mathematical concepts step by step.</p><ul><li>Easy explanations</li><li>Practice problems</li><li>Exam preparation</li></ul><button type="button" onclick="enroll('Mathematics')">Enroll Now</button></article>
+</section>
+<h2 id="formTitle" style="margin-top:38px">Student Enrollment</h2>
+<form id="enrollForm">
+<label for="studentName">Student Name *</label><input id="studentName" name="studentName" required autocomplete="name" placeholder="Enter student name">
+<label for="phone">Phone Number *</label><input id="phone" name="phone" type="tel" required autocomplete="tel" placeholder="01XXXXXXXXX">
+<label for="course">Select Course *</label><select name="course" id="course" required><option value="">Choose a course</option><option>English 1st Paper</option><option>Biology</option><option>Mathematics</option><option>Other</option></select>
+<div class="payment"><strong>Manual Payment Information</strong><br>bKash / Nagad / Rocket<br>Payment Number: <strong>01580692962</strong><br>Account Type: Personal</div>
+<label for="paymentMethod">Payment Method</label><select id="paymentMethod" name="paymentMethod"><option value="Not paid">Not paid yet</option><option>bKash</option><option>Nagad</option><option>Rocket</option></select>
+<label for="transactionId">Transaction ID (if paid)</label><input id="transactionId" name="transactionId" placeholder="Enter transaction ID">
+<label for="message">Message (optional)</label><textarea id="message" name="message" placeholder="Class, batch, or your message"></textarea>
+<div class="notice">Important: This is a front-end template. Submissions are not sent to EDU HUB Academia or saved in an admin panel until Firebase or another secure backend is connected. Do not rely on this form for real enrollment collection yet.</div>
+<button type="submit">Prepare Enrollment Preview</button><p id="result" role="status" aria-live="polite"></p>
+</form></main><footer>© <span id="year"></span> EDU HUB Academia</footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+function enroll(courseName){document.getElementById('course').value=courseName;document.getElementById('formTitle').scrollIntoView({behavior:'smooth'});document.getElementById('studentName').focus({preventScroll:true});}
+document.getElementById('enrollForm').addEventListener('submit',function(event){event.preventDefault();const data=Object.fromEntries(new FormData(this).entries());const preview=['EDU HUB Academia - Enrollment Request Preview','Student: '+data.studentName,'Phone: '+data.phone,'Course: '+data.course,'Payment method: '+data.paymentMethod,'Transaction ID: '+(data.transactionId||'Not provided'),'Message: '+(data.message||'None'),'','Note: This preview has not been submitted to a server.'].join('\n');const blob=new Blob([preview],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='enrollment-preview.txt';document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);document.getElementById('result').textContent='Preview file created on this device. This request has NOT been sent or saved for admin review.';});
+</script></body></html>
