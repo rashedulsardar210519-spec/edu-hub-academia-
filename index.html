@@ -232,6 +232,13 @@ document.getElementById("waFloat").addEventListener("click",function(e){if(!vali
           fee.textContent = course.fee ? "Fee: " + course.fee : "Contact us";
 
           card.append(icon, title, description, fee);
+          
+const enrollButton = document.createElement("button");
+enrollButton.type = "button";
+enrollButton.className = "enroll-now";
+enrollButton.textContent = "Enroll Now";
+card.appendChild(enrollButton);
+
           courseArea.appendChild(card);
         });
       }
@@ -328,5 +335,62 @@ document.getElementById("waFloat").addEventListener("click",function(e){if(!vali
       console.error("Notice loading error:", error);
     });
 })();
+</script>
+<div id="enrollBox" style="display:none;padding:20px;background:#fff;border:1px solid #ddd;border-radius:12px">
+  <h2>Enroll Now</h2>
+  <p>bKash / Nagad / Rocket (Personal): 01580692962</p>
+  <form id="enrollForm">
+    <input id="studentName" placeholder="Student Name" required style="display:block;width:100%;padding:12px;margin:10px 0">
+    <input id="studentPhone" placeholder="Mobile Number" required style="display:block;width:100%;padding:12px;margin:10px 0">
+    <input id="transactionId" placeholder="Transaction ID" required style="display:block;width:100%;padding:12px;margin:10px 0">
+    <button type="submit">Submit Enrollment</button>
+    <button type="button" onclick="document.getElementById('enrollBox').style.display='none'">Cancel</button>
+  </form>
+  <p id="enrollMessage"></p>
+</div>
+
+<script>
+document.addEventListener("click", function(e) {
+  if (e.target.matches(".enroll-now")) {
+    document.getElementById("enrollBox").style.display = "block";
+    document.getElementById("enrollBox").scrollIntoView({behavior:"smooth"});
+  }
+});
+</script>
+<script>
+document.addEventListener("click", function(e) {
+  if (e.target.closest(".enroll-now")) {
+    const card = e.target.closest(".card");
+    const course = card ? card.querySelector("h3")?.textContent.trim() : "";
+    const name = prompt("Enter student name:");
+    if (!name) return;
+    const phone = prompt("Enter mobile number:");
+    if (!phone) return;
+    const method = prompt("Payment method: bKash, Nagad, or Rocket");
+    if (!method) return;
+    const txn = prompt("Enter transaction ID:");
+    if (!txn) return;
+
+    if (!window.firebase || !firebase.firestore) {
+      alert("Firebase is not ready. Please try again.");
+      return;
+    }
+
+    firebase.firestore().collection("admissions").add({
+      name: name.trim(),
+      phone: phone.trim(),
+      course: course || "Course",
+      paymentMethod: method.trim(),
+      transactionId: txn.trim(),
+      status: "pending",
+      paymentStatus: "pending_manual_verification",
+      message: "Course enrollment. Payment requires admin verification."
+    }).then(function() {
+      alert("Enrollment submitted! Status: PENDING admin verification.");
+    }).catch(function(err) {
+      alert("Submission failed: " + err.message);
+    });
+  }
+});
 </script>
 </body></html>
