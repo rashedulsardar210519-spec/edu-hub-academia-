@@ -226,6 +226,28 @@ const videoAuth = firebase.auth();
 const videoDB = firebase.firestore();
 let videoAdminUser = null;
 
+videoDB.collection("videoCourses")
+  .orderBy("createdAt", "desc")
+  .onSnapshot(function(snapshot) {
+    if (snapshot.empty) {
+      document.getElementById("studentStatus").textContent =
+        "এখনও কোনো ভিডিও কোর্স প্রকাশ করা হয়নি।";
+      return;
+    }
+
+    courses = snapshot.docs.map(function(doc) {
+      return { id: doc.id, ...doc.data() };
+    });
+
+    document.getElementById("studentStatus").textContent =
+      "ভিডিও কোর্স সফলভাবে লোড হয়েছে।";
+
+    render();
+  }, function(error) {
+    document.getElementById("studentStatus").textContent =
+      "ভিডিও লোড হয়নি: " + error.message;
+  });
+
 videoAuth.onAuthStateChanged(function(user) {
   if (user && user.uid === "GiBxlhL9NDe6Bs8KJDJ1W74IAUP2") {
     videoAdminUser = user;
