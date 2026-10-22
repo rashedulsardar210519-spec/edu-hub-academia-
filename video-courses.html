@@ -221,7 +221,57 @@ async function uploadVideo(){
 }
 $("googleSignIn").addEventListener("click",connectGoogle);
 $("uploadBtn").addEventListener("click",uploadVideo);
-render();
+
+const videoAuth = firebase.auth();
+const videoDB = firebase.firestore();
+let videoAdminUser = null;
+
+videoAuth.onAuthStateChanged(function(user) {
+  if (user && user.uid === "GiBxlhL9NDe6Bs8KJDJ1W74IAUP2") {
+    videoAdminUser = user;
+    document.getElementById("firebaseStatus").textContent =
+      "Admin logged in: " + user.email;
+  } else {
+    videoAdminUser = null;
+    document.getElementById("firebaseStatus").textContent =
+      "Please login with your Admin account.";
+  }
+});
+
+document.getElementById("firebaseLogin").addEventListener("click", async function() {
+  const email = document.getElementById("firebaseEmail").value.trim();
+  const password = document.getElementById("firebasePassword").value;
+
+  if (!email || !password) {
+    document.getElementById("firebaseStatus").textContent =
+      "Enter your Admin email and password.";
+    return;
+  }
+
+  try {
+    const result = await videoAuth.signInWithEmailAndPassword(email, password);
+
+    if (result.user.uid !== "GiBxlhL9NDe6Bs8KJDJ1W74IAUP2") {
+      await videoAuth.signOut();
+      document.getElementById("firebaseStatus").textContent =
+        "Access denied: this is not the authorized Admin account.";
+      return;
+    }
+
+    document.getElementById("firebaseStatus").textContent =
+      "Admin login successful!";
+  } catch (error) {
+    document.getElementById("firebaseStatus").textContent =
+      "Login failed: " + error.message;
+  }
+});
+
+document.getElementById("firebaseLogout").addEventListener("click", async function() {
+  await videoAuth.signOut();
+  videoAdminUser = null;
+  document.getElementById("firebaseStatus").textContent = "Logged out.";
+});
+      render();
 </script>
 </body>
 </html>
