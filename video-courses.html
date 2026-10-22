@@ -217,9 +217,22 @@ async function uploadVideo(){
   if(!response.ok) throw new Error(data.error?.message||"Drive upload failed");
   const watchUrl="https://drive.google.com/file/d/"+data.id+"/preview";
   const downloadUrl="https://drive.google.com/uc?export=download&id="+data.id;
-  courses.unshift({title,category:$("courseClass").value.trim(),description:$("courseDesc").value.trim(),watchUrl,downloadUrl,fileName:file.name,driveFileId:data.id});
-  render();
-  status("adminStatus","Upload complete: "+data.name+". This preview list is temporary until Firebase/Firestore is connected. Do not share private files publicly.");
+if (!videoAdminUser) {
+  throw new Error("Please login with Firebase Admin first.");
+}
+
+await videoDB.collection("videoCourses").add({
+  title: title,
+  category: $("courseClass").value.trim(),
+  description: $("courseDesc").value.trim(),
+  watchUrl: watchUrl,
+  downloadUrl: downloadUrl,
+  fileName: file.name,
+  driveFileId: data.id,
+  createdAt: firebase.firestore.FieldValue.serverTimestamp()
+});
+
+status("adminStatus", "Video uploaded and saved to Firebase!");
   $("courseTitle").value="";$("courseDesc").value="";$("videoFile").value="";
  }catch(e){status("adminStatus","Upload failed: "+e.message);}
  finally{$("uploadBtn").disabled=!driveReady;}
@@ -303,6 +316,25 @@ document.getElementById("firebaseLogout").addEventListener("click", async functi
   document.getElementById("firebaseStatus").textContent = "Logged out.";
 });
       render();
+ 
+videoDB.collection("videoCourses")
+  .orderBy("createdAt", "desc")
+  .onSnapshot(function(snapshot) {
+    if (snapshot.empty) {
+      document.getElementById("studentStatus").textContent =
+        "এখনও কোনো ভিডিও কোর্স প্রকাশ করা হয়নি।";
+      return;
+    }
+
+    courses = snapshot.docs.map(function(doc) {
+      return { id: doc.id, ...doc.data() };
+    });
+
+    document.getElementById("studentStatus").textContent =
+      "ভিডিও কোর্স সফলভাবে লোড হয়েছে।";
+    render();
+  });
+ 
 </script>
 </body>
 </html>
