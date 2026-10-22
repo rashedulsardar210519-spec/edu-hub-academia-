@@ -222,6 +222,10 @@ async function uploadVideo(){
 $("googleSignIn").addEventListener("click",connectGoogle);
 $("uploadBtn").addEventListener("click",uploadVideo);
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(FIREBASE_CONFIG);
+ }
+ 
 const videoAuth = firebase.auth();
 const videoDB = firebase.firestore();
 let videoAdminUser = null;
