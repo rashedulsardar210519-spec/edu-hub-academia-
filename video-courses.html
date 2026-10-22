@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EDU HUB Academia | Video Courses</title>
 <style>
-:root{--navy:#14213d;--blue:#2563eb;--cyan:#06b6d4;--purple:#7c3aed;--bg:#f4f7ff;--ink:#182235;--muted:#64748b;--white:#fff;--line:#e3e9f5}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:linear-gradient(120deg,#14213d,#3b28a7,#087eaa);color:white;padding:24px 16px 28px}
+:root{--navy:#081225;--blue:#4776ff;--cyan:#29d9ed;--purple:#8b5cf6;--bg:#07101f;--ink:#eef4ff;--muted:#a2b1cc;--white:#101d33;--line:#263754}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at top,#14284a 0,#07101f 58%);color:var(--ink);min-height:100vh}
+header{background:linear-gradient(120deg,#080f20,#192c58,#3a237b);color:white;padding:24px 16px 28px;border-bottom:1px solid #33466b;box-shadow:0 16px 50px #0005}
 .wrap{max-width:1050px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .brand{font-size:1.35rem;font-weight:850}.brand span{color:#67e8f9}.sub{opacity:.9;font-size:.95rem;margin-top:8px}
 nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}button,.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}
 nav button{background:#ffffff20;color:white;border:1px solid #ffffff50}nav button.active{background:white;color:#252c61}
-main{max-width:1050px;margin:22px auto;padding:0 14px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:18px;box-shadow:0 8px 28px #1e2b4a0b}
+main{max-width:1050px;margin:22px auto;padding:0 14px}.panel{background:linear-gradient(145deg,#101d33f5,#0c1729f5);border:1px solid #263754;border-radius:20px;padding:20px;margin-bottom:18px;box-shadow:0 16px 40px #0003}
 h2{margin:0 0 12px;font-size:1.25rem}p{line-height:1.55}.muted{color:var(--muted);font-size:.92rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}
-label{display:block;font-weight:700;font-size:.9rem;margin:12px 0 6px}input,textarea,select{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:12px;font:inherit;background:white}textarea{min-height:80px;resize:vertical}
-.primary{background:linear-gradient(110deg,var(--blue),var(--purple));color:white}.secondary{background:#eaf0ff;color:#243b83}.danger{background:#fff0f0;color:#b42318}.dark{background:var(--navy);color:white}
-.course{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.courseTop{padding:18px;background:linear-gradient(130deg,#e0f2fe,#ede9fe)}.courseBody{padding:16px}.pill{display:inline-block;background:#dcfce7;color:#166534;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:800}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{flex:1}
-.hidden{display:none!important}.notice{background:#fff7d6;border:1px solid #fde68a;border-radius:12px;padding:12px;color:#854d0e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+label{display:block;font-weight:700;font-size:.9rem;margin:12px 0 6px}input,textarea,select{width:100%;border:1px solid #344766;border-radius:11px;padding:12px;font:inherit;background:#091426;color:#eef4ff}input::placeholder,textarea::placeholder{color:#7185a6}textarea{min-height:80px;resize:vertical}
+.primary{background:linear-gradient(110deg,var(--blue),var(--purple));color:white}.secondary{background:#1b2d4a;color:#dce8ff;border:1px solid #344766}.danger{background:#3b1b2a;color:#ffb9c6}.dark{background:#162642;color:white;border:1px solid #40577b}
+.course{border:1px solid #2b3f60;border-radius:18px;overflow:hidden;background:#0d192c;box-shadow:0 12px 32px #0003;transition:transform .2s,border-color .2s}.course:hover{transform:translateY(-3px);border-color:#617dff}.courseTop{padding:18px;background:linear-gradient(130deg,#162d50,#282052)}.courseBody{padding:16px}.video-frame{position:relative;background:#020611;aspect-ratio:16/9;overflow:hidden;border-radius:14px;border:1px solid #344766;box-shadow:0 8px 24px #0005}.video-frame iframe{display:block;width:100%;height:100%;border:0}.player-label{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#9fb6db;font-size:.78rem;margin:10px 2px 0}.courseBody p{color:#c3cee2}.pill{display:inline-block;background:#dcfce7;color:#166534;border-radius:999px;padding:4px 9px;font-size:.75rem;font-weight:800}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{flex:1}
+.hidden{display:none!important}.notice{background:#1b2b48;border:1px solid #435b88;border-radius:12px;padding:12px;color:#d8e6ff}
 footer{text-align:center;color:var(--muted);padding:25px 10px;font-size:.85rem}
-small{color:var(--muted)}.status{padding:10px 12px;border-radius:10px;background:#f1f5f9;margin-top:10px;overflow-wrap:anywhere}
-@media(max-width:560px){header{padding-top:18px}.brand{font-size:1.12rem}button,.btn{padding:10px 12px}}
+small{color:var(--muted)}.status{padding:11px 13px;border-radius:11px;background:#101f36;border:1px solid #2b3f60;color:#d4e2fa;margin-top:10px;overflow-wrap:anywhere}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #67e8f9;outline-offset:2px}@media(max-width:560px){header{padding-top:18px}.brand{font-size:1.12rem}button,.btn{padding:10px 12px}.panel{padding:14px}.courseTop{padding:15px}}
 </style>
 </head>
 <body>
 <header>
  <div class="wrap">
-  <div class="top"><div><div class="brand">🎓 EDU HUB <span>Academia</span></div><div class="sub">Online Video Courses · Learn anywhere, anytime</div></div><a class="btn" style="background:white;color:#25316b" href="index.html">← Main Website</a></div>
+  <div class="top"><div><div class="brand">🎓 EDU HUB <span>Academia</span></div><div class="sub">PREMIUM VIDEO CLASSROOM · Learn anywhere, anytime</div></div><a class="btn" style="background:white;color:#25316b" href="index.html">← Main Website</a></div>
   <nav>
    <button class="active" data-tab="student">Student Dashboard</button>
    <button data-tab="admin">Admin Panel</button>
@@ -35,18 +35,18 @@ small{color:var(--muted)}.status{padding:10px 12px;border-radius:10px;background
  </div>
 </header>
 <main>
- <div class="notice"><b>Setup required:</b> Before this page can upload to Google Drive, enter your Google API key, OAuth Client ID, Drive folder ID, Firebase config, and admin email in the settings section of this file. This starter does not pretend to be connected until those are configured.</div>
+ <div class="notice"><b>EDU HUB VIDEO CLASSROOM</b> — Premium video player design. Admin uploads are saved to Firebase, and students can watch lessons directly on this page.</div>
 
  <section id="student" class="tab panel">
   <h2>📚 Student Video Dashboard</h2>
-  <p class="muted">Your published lessons appear below. Open a lesson to watch it, or use Download when the owner has enabled downloading.</p>
-  <div id="studentStatus" class="status">Demo mode: no course database is connected yet. Configure Firebase to load the shared course list across devices.</div>
+  <p class="muted">ভিডিও সরাসরি এই ওয়েবসাইটের প্লেয়ারে দেখুন। প্রয়োজন হলে Download বাটন ব্যবহার করুন।</p>
+  <div id="studentStatus" class="status">Firebase থেকে প্রকাশিত ভিডিও লোড হচ্ছে…</div>
   <div id="courseList" class="grid" style="margin-top:15px"></div>
  </section>
 
  <section id="admin" class="tab panel hidden">
   <h2>🛠️ Admin Video Manager</h2>
-  <p class="muted">Sign in with the authorized Google account, select a video, and upload it to your Drive folder. Published course details are saved to Firestore once configured.</p>
+  <p class="muted">প্রথমে Firebase Admin Login করুন, তারপর Google Drive Connect করে ভিডিও আপলোড করুন। ভিডিওর তথ্য সব শিক্ষার্থীর জন্য Firebase-এ সেভ হবে।</p>
 <div class="grid">
   <div>
     <label for="firebaseEmail">Admin Email</label>
@@ -155,25 +155,42 @@ function configured(){
 function render(){
  const student = $("courseList"), admin = $("adminCourseList");
  student.innerHTML = ""; admin.innerHTML = "";
- if(!courses.length) student.innerHTML = '<p class="muted">No published videos yet. After connecting the database, published lessons will show here.</p>';
- courses.forEach((c,i)=>{
-  const card = document.createElement("article"); card.className="course";
-  card.innerHTML = `<div class="courseTop"><span class="pill">VIDEO LESSON</span><h3></h3><small></small></div><div class="courseBody"><p></p><div class="actions"><a class="btn primary" target="_blank" rel="noopener">▶ Watch</a><a class="btn secondary" target="_blank" rel="noopener">↓ Download</a></div></div>`;
-  card.querySelector("h3").textContent=c.title;
-  card.querySelector("small").textContent=c.category||"EDU HUB Academia";
-  card.querySelector(".courseBody p").textContent=c.description||"";
-  const links=card.querySelectorAll("a"); links[0].href=c.watchUrl; links[1].href=c.downloadUrl||c.watchUrl;
-  student.appendChild(card);
-  const adminCard=document.createElement("article"); adminCard.className="course";
-  adminCard.innerHTML='<div class="courseBody"><b></b><p class="muted"></p><button class="danger">Remove from this preview</button></div>';
-  adminCard.querySelector("b").textContent=c.title; adminCard.querySelector("p").textContent=c.fileName||"Drive video";
-  adminCard.querySelector("button").addEventListener("click",()=>{courses.splice(i,1);render();});
-  admin.appendChild(adminCard);
+ if(!courses.length){
+   student.innerHTML = '<div class="status" style="grid-column:1/-1">এখনও কোনো ভিডিও প্রকাশ করা হয়নি। Admin Panel থেকে ভিডিও আপলোড করুন।</div>';
+   admin.innerHTML = '<p class="muted">এখনও কোনো প্রকাশিত ভিডিও নেই।</p>';
+   return;
+ }
+ courses.forEach((c)=>{
+   const card = document.createElement("article"); card.className="course";
+   card.innerHTML = `<div class="courseTop"><span class="pill">▶ VIDEO LESSON</span><h3></h3><small></small></div><div class="courseBody"><div class="video-frame"><iframe class="videoPlayer" title="EDU HUB video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="player-label"><span>▶ EDU HUB PLAYER</span><span>HD · ONLINE CLASS</span></div><p></p><div class="actions"><a class="btn primary watchLink" target="_blank" rel="noopener">↗ Open player</a><a class="btn secondary downloadLink" target="_blank" rel="noopener">↓ Download</a></div></div>`;
+   card.querySelector("h3").textContent=c.title||"Video lesson";
+   card.querySelector("small").textContent=c.category||"EDU HUB Academia";
+   card.querySelector(".courseBody p").textContent=c.description||"";
+   const preview = c.watchUrl || (c.driveFileId ? "https://drive.google.com/file/d/"+encodeURIComponent(c.driveFileId)+"/preview" : "");
+   card.querySelector(".videoPlayer").src = preview;
+   card.querySelector(".watchLink").href = preview || "#";
+   card.querySelector(".downloadLink").href = c.downloadUrl || (c.driveFileId ? "https://drive.google.com/uc?export=download&id="+encodeURIComponent(c.driveFileId) : preview || "#");
+   student.appendChild(card);
+
+   const adminCard=document.createElement("article"); adminCard.className="course";
+   adminCard.innerHTML='<div class="courseBody"><b></b><p class="muted"></p><button class="danger">Delete published lesson</button></div>';
+   adminCard.querySelector("b").textContent=c.title||"Video lesson";
+   adminCard.querySelector("p").textContent=c.fileName||"Google Drive video";
+   const delBtn=adminCard.querySelector("button");
+   delBtn.addEventListener("click",async()=>{
+     if(!videoAdminUser){status("firebaseStatus","Delete করার আগে Firebase Admin Login করুন।");return;}
+     if(!confirm("এই ভিডিওটি প্রকাশিত তালিকা থেকে মুছে ফেলবেন? Google Drive-এর ফাইল আলাদাভাবে থেকে যেতে পারে।"))return;
+     delBtn.disabled=true;
+     try{await videoDB.collection("videoCourses").doc(c.id).delete();status("firebaseStatus","ভিডিওটি প্রকাশিত তালিকা থেকে মুছে দেওয়া হয়েছে।");}
+     catch(e){status("firebaseStatus","Delete failed: "+e.message);delBtn.disabled=false;}
+   });
+   admin.appendChild(adminCard);
  });
 }
 function loadScript(src){return new Promise((resolve,reject)=>{const s=document.createElement("script");s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});}
 async function connectGoogle(){
- if(!configured()){status("adminStatus","Please replace all Google configuration placeholders at the bottom of this file first.");return;}
+ if(!videoAdminUser){status("adminStatus","আগে Firebase Admin Login করুন, তারপর Google Drive Connect করুন।");return;}
+ if(!configured()){status("adminStatus","Google configuration settings পরীক্ষা করুন।");return;}
  try{
   if(!window.google) await loadScript("https://accounts.google.com/gsi/client");
   if(!window.gapi) await loadScript("https://apis.google.com/js/api.js");
@@ -251,23 +268,18 @@ let videoAdminUser = null;
 videoDB.collection("videoCourses")
   .orderBy("createdAt", "desc")
   .onSnapshot(function(snapshot) {
-    if (snapshot.empty) {
-      document.getElementById("studentStatus").textContent =
-        "এখনও কোনো ভিডিও কোর্স প্রকাশ করা হয়নি।";
-      return;
-    }
-
     courses = snapshot.docs.map(function(doc) {
       return { id: doc.id, ...doc.data() };
     });
-
-    document.getElementById("studentStatus").textContent =
-      "ভিডিও কোর্স সফলভাবে লোড হয়েছে।";
-
+    document.getElementById("studentStatus").textContent = snapshot.empty
+      ? "এখনও কোনো ভিডিও কোর্স প্রকাশ করা হয়নি।"
+      : "ভিডিও কোর্স সফলভাবে লোড হয়েছে।";
     render();
   }, function(error) {
+    courses = [];
+    render();
     document.getElementById("studentStatus").textContent =
-      "ভিডিও লোড হয়নি: " + error.message;
+      "ভিডিও লোড হয়নি: " + error.message + " — Firestore Rules পরীক্ষা করুন।";
   });
 
 videoAuth.onAuthStateChanged(function(user) {
@@ -315,26 +327,6 @@ document.getElementById("firebaseLogout").addEventListener("click", async functi
   videoAdminUser = null;
   document.getElementById("firebaseStatus").textContent = "Logged out.";
 });
-      render();
- 
-videoDB.collection("videoCourses")
-  .orderBy("createdAt", "desc")
-  .onSnapshot(function(snapshot) {
-    if (snapshot.empty) {
-      document.getElementById("studentStatus").textContent =
-        "এখনও কোনো ভিডিও কোর্স প্রকাশ করা হয়নি।";
-      return;
-    }
-
-    courses = snapshot.docs.map(function(doc) {
-      return { id: doc.id, ...doc.data() };
-    });
-
-    document.getElementById("studentStatus").textContent =
-      "ভিডিও কোর্স সফলভাবে লোড হয়েছে।";
-    render();
-  });
- 
 </script>
 </body>
 </html>
