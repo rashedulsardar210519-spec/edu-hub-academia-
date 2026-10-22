@@ -47,6 +47,26 @@ small{color:var(--muted)}.status{padding:10px 12px;border-radius:10px;background
  <section id="admin" class="tab panel hidden">
   <h2>🛠️ Admin Video Manager</h2>
   <p class="muted">Sign in with the authorized Google account, select a video, and upload it to your Drive folder. Published course details are saved to Firestore once configured.</p>
+<div class="grid">
+  <div>
+    <label for="firebaseEmail">Admin Email</label>
+    <input id="firebaseEmail" type="email" placeholder="Admin email">
+  </div>
+  <div>
+    <label for="firebasePassword">Admin Password</label>
+    <input id="firebasePassword" type="password" placeholder="Admin password">
+  </div>
+</div>
+
+<div class="actions">
+  <button id="firebaseLogin" class="dark">Firebase Admin Login</button>
+  <button id="firebaseLogout" class="secondary">Logout</button>
+</div>
+
+<div id="firebaseStatus" class="status">
+  Please login with your Firebase Admin account.
+</div>
+  
   <div class="grid">
    <div><label for="courseTitle">Course / lesson title</label><input id="courseTitle" placeholder="e.g. Class 7 Science — Chapter 1"></div>
    <div><label for="courseClass">Class / category</label><input id="courseClass" placeholder="e.g. Class 7 · Science"></div>
@@ -77,12 +97,17 @@ small{color:var(--muted)}.status{padding:10px 12px;border-radius:10px;background
 </main>
 <footer>© EDU HUB Academia & Learning Point · Built for mobile use</footer>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
 <script>
 /*
  * CONFIGURATION — replace these placeholders before connecting services.
  * Google Drive upload needs a Google Cloud API key, OAuth web client ID,
  * and a Drive folder ID. Firebase config is needed for shared course records.
  */
+ 
 const GOOGLE_API_KEY = "PASTE_GOOGLE_API_KEY_HERE";
 const GOOGLE_CLIENT_ID = "PASTE_OAUTH_CLIENT_ID_HERE";
 const DRIVE_FOLDER_ID = "PASTE_DRIVE_FOLDER_ID_HERE";
