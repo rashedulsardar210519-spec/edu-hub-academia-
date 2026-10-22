@@ -97,7 +97,16 @@ const FIREBASE_CONFIG = {
 
 // Starter demo list only. This local list is not shared between devices.
 // Replace with Firestore-backed records before using this for real students.
-let courses = [];
+ 
+let courses = [{
+  title: "EDU HUB Video Lesson 1",
+  category: "Free Video Course",
+  description: "Free video lesson for all EDU HUB students.",
+  watchUrl: "https://drive.google.com/file/d/1_m95Zn7l7Ct-OFYj-IbPzmGIBU5RYS2p/preview",
+  downloadUrl: "https://drive.google.com/uc?export=download&id=1_m95Zn7l7Ct-OFYj-IbPzmGIBU5RYS2p",
+  fileName: "Google Drive Video"
+}];
+
 let accessToken = "";
 let tokenClient = null;
 let driveReady = false;
